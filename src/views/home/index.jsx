@@ -3,14 +3,23 @@ import {HomeWrapper} from "./style"
 import Banner from "./Banner"
 import {useSelector, useDispatch, shallowEqual} from "react-redux"
 import {fetchHomeDataAction} from "@/store/modules/home"
-import SectionHeader from "@/components/SectionHeader"
-import SectionRooms from "@/components/SectionRooms"
+import Section1 from "./Section1"
+import Section2 from "./Section2"
+import {isEmptyObject} from "leaf-lib"
 
 const Home = memo(() => {
   const dispatch = useDispatch()
-  const {goodPriceInfo} = useSelector((state) => {
+  const {
+    goodPriceInfo,
+    highScoreInfo,
+    discountInfo,
+    hotRecommendDestInfo,
+  } = useSelector((state) => {
     return {
-      goodPriceInfo: state.homeState.goodPriceInfo
+      goodPriceInfo: state.homeState.goodPriceInfo,
+      highScoreInfo: state.homeState.highScoreInfo,
+      discountInfo: state.homeState.discountInfo,
+      hotRecommendDestInfo: state.homeState.hotRecommendDestInfo
     }
   }, shallowEqual)
   useEffect(() => {
@@ -21,10 +30,13 @@ const Home = memo(() => {
     <HomeWrapper>
       <Banner />
       <div className="content">
-        <div className="good-price">
-          <SectionHeader title={goodPriceInfo.title}></SectionHeader>
-          <SectionRooms roomList={goodPriceInfo.list}></SectionRooms>
-        </div>
+        {isEmptyObject(discountInfo) || <Section2 dataInfo={discountInfo} />}
+        {isEmptyObject(hotRecommendDestInfo) || (
+          <Section2 dataInfo={hotRecommendDestInfo} />
+        )}
+
+        {isEmptyObject(goodPriceInfo) || <Section1 dataInfo={goodPriceInfo} />}
+        {isEmptyObject(highScoreInfo) || <Section1 dataInfo={highScoreInfo} />}
       </div>
     </HomeWrapper>
   )

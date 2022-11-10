@@ -15,7 +15,6 @@ export const FooterWrapper = styled.div`
       display: flex;
       justify-content: space-between;
       font-size: 14px;
-      font-weight: 800;
       padding-bottom: 20px;
       border-bottom: 1px solid #ddd;
 
@@ -24,6 +23,7 @@ export const FooterWrapper = styled.div`
           color: rgb(72, 72, 72);
           font-size: 14px;
           margin-bottom: 12px;
+          font-weight: 800;
         }
 
         ul > li {

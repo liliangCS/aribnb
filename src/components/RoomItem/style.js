@@ -1,7 +1,7 @@
 import styled from "styled-components"
 
 export const RoomItemWrapper = styled.div`
-  width: 25%;
+  width: ${props => props.itemWidth ?? "25%"};
   padding: 8px;
   box-sizing: border-box;
 
@@ -46,5 +46,17 @@ export const RoomItemWrapper = styled.div`
 
   .price {
     margin: 8px 0;
+  }
+
+  .score {
+    .ant-rate-star:not(:last-child) {
+      margin-right: 0px;
+    }
+
+    span {
+      font-size: 12px;
+      font-weight: 600;
+      vertical-align: top;
+    }
   }
 `
